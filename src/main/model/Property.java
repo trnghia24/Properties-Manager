@@ -1,5 +1,7 @@
 package model;
 
+// Represent a property having an address, monthly rental price (in dollars), capacity of tenants, status (available
+// or rented) and if the rent has been paid or not
 public class Property {
     private String address;
     private Double price;
@@ -51,22 +53,21 @@ public class Property {
         return paid;
     }
 
-    public void markAsPaid() {
-        setPaid(true);
-    }
-
-    public void markAsUnpaid() {
-        setPaid(false);
-    }
-
-    public void markAsRented() {
-        setStatus(true);
-    }
-
-    public void markAsUnRented() {
-        setStatus(false);
-    }
-
+//    public void markAsPaid() {
+//        setPaid(true);
+//    }
+//
+//    public void markAsUnpaid() {
+//        setPaid(false);
+//    }
+//
+//    public void markAsRented() {
+//        setStatus(true);
+//    }
+//
+//    public void markAsUnRented() {
+//        setStatus(false);
+//    }
 
 
 }

@@ -79,15 +79,9 @@ public class ManagerApp {
         Integer tenants = input.nextInt();
         h.setCapacity(tenants);
 
-        System.out.print("Was the property rented? ");
-        Boolean status = input.nextBoolean();
-        if (status) {
-            h.markAsRented();
-        } else {
-            h.markAsUnRented();
-        }
+        askRented(h);
 
-        h.markAsUnpaid();
+        h.setPaid(false);
         properties.addProperty(h);
 
         System.out.println("My list of properties: ");
@@ -95,6 +89,24 @@ public class ManagerApp {
             System.out.println(p.getAddress());
         }
         System.out.println("I have " + properties.getProperties().size() + " properties");
+    }
+
+    private void askRented(Property h) {
+        System.out.print("Was the property rented? ");
+        String status = input.nextLine();
+        Boolean validStatus = false;
+        while (!validStatus) {
+            status = input.nextLine();
+            if (status.equals("true")) {
+                validStatus = true;
+                h.setStatus(true);
+            } else if (status.equals("false")) {
+                validStatus = true;
+                h.setStatus(false);
+            } else {
+                System.out.println("invalid. enter one of true / false");
+            }
+        }
     }
 
     private void doDelete() {
@@ -115,7 +127,7 @@ public class ManagerApp {
 
         Property h = properties.getPropertyByAddress(address);
         System.out.println("Address: " + h.getAddress());
-        System.out.println("Monthly rental fee: " + h.getPrice());
+        System.out.println("Monthly rental fee: " + "$" + h.getPrice());
         System.out.println("Rented? " + h.getStatus());
         System.out.println("Number of tenants: " + h.getCapacity());
         System.out.println("Rent paid? " + h.getPaid());
@@ -124,11 +136,6 @@ public class ManagerApp {
     private void doUpdate() {
         System.out.print("Enter the address of the property: ");
         String address = input.next();
-
-        System.out.println("\tstatus -> Update rental status");
-        System.out.println("\tprice -> Update new rental price");
-        System.out.println("\tpay -> Update rental payment status");
-
         String selection = "";  // force entry into loop
 
         while (!(selection.equals("status") || selection.equals("price") || selection.equals("pay"))) {

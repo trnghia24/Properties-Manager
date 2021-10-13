@@ -114,7 +114,7 @@ class ManagementListTest {
     public void testUnrentedNull() {
         testList.addProperty(p1);
         testList.addProperty(p3);
-        List<Property> unrentedList = testList.getUnrentedProperties();
+        List<Property> unrentedList = testList.getNotRentedProperties();
         assertTrue(unrentedList.isEmpty());
         assertEquals(0, unrentedList.size());
 
@@ -125,7 +125,7 @@ class ManagementListTest {
         testList.addProperty(p1);
         testList.addProperty(p2);
         testList.addProperty(p3);
-        List<Property> unrentedList = testList.getUnrentedProperties();
+        List<Property> unrentedList = testList.getNotRentedProperties();
         assertFalse(unrentedList.isEmpty());
         assertFalse(unrentedList.contains(p1));
         assertFalse(unrentedList.contains(p3));
@@ -187,5 +187,15 @@ class ManagementListTest {
         testList.addProperty(p2);
         testList.addProperty(p3);
         assertEquals(testList.getPropertyByAddress("2623 Camosun Street"), p3);
+    }
+
+    @Test
+    public void testGetPropertyByAddressFail() {
+        assertEquals(testList.getPropertyByAddress("2623 Nanaimo Street"), null);
+    }
+
+    @Test
+    public void testGetPropertyByAddressNull() {
+        assertEquals(testList.getPropertyByAddress("2623 Camosun Street"), null);
     }
 }
