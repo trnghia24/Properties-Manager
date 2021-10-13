@@ -33,6 +33,7 @@ public class ManagerApp {
         System.out.println("\nGoodbye!");
     }
 
+    // source: edx
     // MODIFIES: this
     // EFFECTS: processes user command
     private void processCommand(String command) {
