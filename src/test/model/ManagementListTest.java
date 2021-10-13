@@ -191,6 +191,9 @@ class ManagementListTest {
 
     @Test
     public void testGetPropertyByAddressFail() {
+        testList.addProperty(p1);
+        testList.addProperty(p2);
+        testList.addProperty(p3);
         assertEquals(testList.getPropertyByAddress("2623 Nanaimo Street"), null);
     }
 
