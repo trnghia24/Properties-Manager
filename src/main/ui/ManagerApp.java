@@ -2,16 +2,24 @@ package ui;
 
 import model.*;
 
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
+// This class references code from this repo
+// https://github.students.cs.ubc.ca/CPSC210/TellerApp.git
+// Manager application
 public class ManagerApp {
     private ManagementList properties;
     private Scanner input;
 
+    // Run the Manager application
     public ManagerApp() {
         runManager();
     }
 
+
+    // MODIFIES: this
+    // EFFECTS: processes user inputs
     private void runManager() {
         boolean keepGoing = true;
         String command = null;
@@ -33,7 +41,6 @@ public class ManagerApp {
         System.out.println("\nGoodbye!");
     }
 
-    // source: edx
     // MODIFIES: this
     // EFFECTS: processes user command
     private void processCommand(String command) {
@@ -50,6 +57,8 @@ public class ManagerApp {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: initialize a list of properties to manage
     private void init() {
         properties = new ManagementList();
         input = new Scanner(System.in);
@@ -66,6 +75,8 @@ public class ManagerApp {
         System.out.println("\tquit -> Quit");
     }
 
+    // MODIFIES: this
+    // EFFECTS: enable users to add a new property to the management list
     private void doAdd() {
         Property h = new Property();
         System.out.print("Enter the address of the property: ");
@@ -85,13 +96,11 @@ public class ManagerApp {
         h.setPaid(false);
         properties.addProperty(h);
 
-        System.out.println("My list of properties: ");
-        for (Property p: properties.getProperties()) {
-            System.out.println(p.getAddress());
-        }
-        System.out.println("I have " + properties.getProperties().size() + " properties");
+        displayAllProperties();
     }
 
+    // MODIFIES: this
+    // EFFECTS: ask users if the current property to be added is rented or still available and record their answers
     private void askRented(Property h) {
         System.out.print("Was the property rented? ");
         String status = input.nextLine();
@@ -110,22 +119,51 @@ public class ManagerApp {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: enable users to delete a property from management list
     private void doDelete() {
         System.out.print("Enter the address of the property: ");
         String address = input.next();
         properties.deleteProperty(properties.getPropertyByAddress(address));
 
-        System.out.println("My list of properties: ");
-        for (Property p: properties.getProperties()) {
-            System.out.println(p.getAddress());
-        }
-        System.out.println("I have " + properties.getProperties().size() + " properties");
+        displayAllProperties();
     }
 
-    private void doView() {
-        System.out.print("Enter the address of the property: ");
-        String address = input.next();
+    // EFFECTS: prints out the number and addresses of all properties being managed
+    private void displayAllProperties() {
+        if (properties.getProperties().isEmpty()) {
+            System.out.println("You have 0 properties");
+        } else {
+            System.out.println("** My list of properties: ");
+            for (Property p : properties.getProperties()) {
+                System.out.println(p.getAddress());
+            }
+            System.out.println("** You have " + properties.getProperties().size() + " properties");
+        }
+    }
 
+    // MODIFIES: this
+    // EFFECTS: display a property in detail
+    private void doView() {
+        String address;
+        Boolean validStatus = false;
+        while (!validStatus) {
+            System.out.print("Enter the address of the property: ");
+            address = input.next();
+            if (properties.getProperties().isEmpty()) {
+                System.out.println("You have 0 propeties");
+                break;
+            } else if (properties.getPropertyByAddress(address) == null) {
+                System.out.println("The entered address does not match any property");
+            } else {
+                validStatus = true;
+                displayProperty(address);
+            }
+        }
+    }
+
+    // EFFECTS: print out the information of a property
+    private void displayProperty(String address) {
         Property h = properties.getPropertyByAddress(address);
         System.out.println("Address: " + h.getAddress());
         System.out.println("Monthly rental fee: " + "$" + h.getPrice());
@@ -134,15 +172,36 @@ public class ManagerApp {
         System.out.println("Rent paid? " + h.getPaid());
     }
 
+
+    // MODIFIES: this
+    // EFFECTS: enable users to update a property' attributes
     private void doUpdate() {
-        System.out.print("Enter the address of the property: ");
-        String address = input.next();
+        String address;
+        Boolean validStatus = false;
+        while (!validStatus) {
+            System.out.print("Enter the address of the property: ");
+            address = input.next();
+            if (properties.getProperties().isEmpty()) {
+                System.out.println("You have 0 propeties");
+                break;
+            } else if (properties.getPropertyByAddress(address) == null) {
+                System.out.println("The entered address does not match any property");
+            } else {
+                validStatus = true;
+                makeUpdateChoices(address);
+            }
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: prompts users to choose which property in the list to update and which type of information to update
+    private void makeUpdateChoices(String address) {
         String selection = "";  // force entry into loop
 
-        while (!(selection.equals("status") || selection.equals("price") || selection.equals("pay"))) {
-            System.out.println("status for updating rental status");
-            System.out.println("price for updating new rental price");
-            System.out.println("pay for updating payment status");
+        while (!(selection.equals("status") || selection.equals("price") || selection.equals("payment"))) {
+            System.out.println("enter 'status' for updating rental status");
+            System.out.println("enter 'price' for updating new rental price");
+            System.out.println("enter 'payment' for updating payment status");
             selection = input.next();
             selection = selection.toLowerCase();
 
@@ -150,34 +209,42 @@ public class ManagerApp {
                 doUpdateRentStatus(address);
             } else if (selection.equals("price")) {
                 doUpdatePrice(address);
-            } else {
+            } else if (selection.equals("payment")) {
                 doUpdatePaymentStatus(address);
+            } else {
+                System.out.println("Selection not valid...");
             }
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: enable users to enter the payment status for a property(true if rent paid, false if rent not paid)
     private void doUpdatePaymentStatus(String address) {
         Property house = properties.getPropertyByAddress(address);
         System.out.println("Enter true to mark as paid, enter false to mark as not paid");
         Boolean status = input.nextBoolean();
         house.setPaid(status);
-
-
+        displayProperty(address);
     }
 
+    // MODIFIES: this
+    // EFFECTS: enable users to change the rental fee for a property
     private void doUpdatePrice(String address) {
         Property house = properties.getPropertyByAddress(address);
         System.out.print("Enter new price: $");
         Double amount = input.nextDouble();
         house.setPrice(amount);
+        displayProperty(address);
     }
 
+    // MODIFIES: this
+    // EFFECTS: enable users to mark a property as rented or available for rent
     private void doUpdateRentStatus(String address) {
         Property house = properties.getPropertyByAddress(address);
         System.out.println("Enter true to update that the property is rented, false that the property is available");
         Boolean status = input.nextBoolean();
         house.setStatus(status);
-
+        displayProperty(address);
     }
 
 

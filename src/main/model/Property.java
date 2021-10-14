@@ -53,21 +53,4 @@ public class Property {
         return paid;
     }
 
-//    public void markAsPaid() {
-//        setPaid(true);
-//    }
-//
-//    public void markAsUnpaid() {
-//        setPaid(false);
-//    }
-//
-//    public void markAsRented() {
-//        setStatus(true);
-//    }
-//
-//    public void markAsUnRented() {
-//        setStatus(false);
-//    }
-
-
 }
