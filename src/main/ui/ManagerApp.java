@@ -114,7 +114,7 @@ public class ManagerApp {
                 validStatus = true;
                 h.setStatus(false);
             } else {
-                System.out.println("invalid. enter one of true / false");
+                System.out.println("Invalid. Enter one of true / false");
             }
         }
     }
@@ -151,7 +151,7 @@ public class ManagerApp {
             System.out.print("Enter the address of the property: ");
             address = input.next();
             if (properties.getProperties().isEmpty()) {
-                System.out.println("You have 0 propeties");
+                System.out.println("No results found. You have 0 properties");
                 break;
             } else if (properties.getPropertyByAddress(address) == null) {
                 System.out.println("The entered address does not match any property");
@@ -194,7 +194,7 @@ public class ManagerApp {
     }
 
     // MODIFIES: this
-    // EFFECTS: prompts users to choose which property in the list to update and which type of information to update
+    // EFFECTS: prompts users to choose which field of information to update
     private void makeUpdateChoices(String address) {
         String selection = "";  // force entry into loop
 
@@ -228,7 +228,7 @@ public class ManagerApp {
     }
 
     // MODIFIES: this
-    // EFFECTS: enable users to change the rental fee for a property
+    // EFFECTS: enable users to change the rental price for a property
     private void doUpdatePrice(String address) {
         Property house = properties.getPropertyByAddress(address);
         System.out.print("Enter new price: $");

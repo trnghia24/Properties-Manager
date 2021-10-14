@@ -13,6 +13,7 @@ public class Property {
 
     }
 
+    //setters and getters
     public void setAddress(String address) {
         this.address = address;
     }
