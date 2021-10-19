@@ -18,5 +18,8 @@ complicated and cumbersome.
 - As a user, I want to be able to view a property in details.
 - As a user, I want to be able to change the rental status (rented or available), the payment status (paid or unpaid) 
 and change the rental price if necessary.
+- As a user, when I start the application, I want to be given the option to load my management list from file
+- As a user, whn I select the quit option from the application menu, I want to be reminded to save my management list 
+to file and have the option to do so or not.
 
 
