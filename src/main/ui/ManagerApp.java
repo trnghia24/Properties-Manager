@@ -1,7 +1,11 @@
 package ui;
 
 import model.*;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.SQLOutput;
 import java.util.Scanner;
 
@@ -9,11 +13,14 @@ import java.util.Scanner;
 // https://github.students.cs.ubc.ca/CPSC210/TellerApp.git
 // Manager application
 public class ManagerApp {
-    private ManagementList properties;
+    private static final String JSON_STORE = "./data/managementlist.json";
     private Scanner input;
+    private ManagementList properties;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     // Run the Manager application
-    public ManagerApp() {
+    public ManagerApp() throws FileNotFoundException {
         runManager();
     }
 
@@ -41,6 +48,29 @@ public class ManagerApp {
         System.out.println("\nGoodbye!");
     }
 
+
+    // MODIFIES: this
+    // EFFECTS: initialize a list of properties to manage
+    private void init() {
+        input = new Scanner(System.in);
+        properties = new ManagementList();
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
+        input.useDelimiter("\n");
+    }
+
+    // EFFECTS: displays menu of options to user
+    private void displayMenu() {
+        System.out.println("\nSelect from:");
+        System.out.println("\tadd -> Add new property");
+        System.out.println("\tdelete -> Delete a property from management list");
+        System.out.println("\tview -> View details of a property");
+        System.out.println("\tupdate -> Update a property's information");
+        System.out.println("\tsave -> save work room to file");
+        System.out.println("\tload -> load work room from file");
+        System.out.println("\tquit -> Quit");
+    }
+
     // MODIFIES: this
     // EFFECTS: processes user command
     private void processCommand(String command) {
@@ -52,27 +82,13 @@ public class ManagerApp {
             doView();
         } else if (command.equals("update")) {
             doUpdate();
+        } else if (command.equals("save")) {
+            saveManagementList();
+        } else if (command.equals("load")) {
+            loadManagementList();
         } else {
             System.out.println("Selection not valid...");
         }
-    }
-
-    // MODIFIES: this
-    // EFFECTS: initialize a list of properties to manage
-    private void init() {
-        properties = new ManagementList();
-        input = new Scanner(System.in);
-        input.useDelimiter("\n");
-    }
-
-    // EFFECTS: displays menu of options to user
-    private void displayMenu() {
-        System.out.println("\nSelect from:");
-        System.out.println("\tadd -> Add new property");
-        System.out.println("\tdelete -> Delete a property from management list");
-        System.out.println("\tview -> View details of a property");
-        System.out.println("\tupdate -> Update a property's information");
-        System.out.println("\tquit -> Quit");
     }
 
     // MODIFIES: this
@@ -245,6 +261,29 @@ public class ManagerApp {
         Boolean status = input.nextBoolean();
         house.setStatus(status);
         displayProperty(address);
+    }
+
+    // EFFECTS: saves the management list to file
+    private void saveManagementList() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(properties);
+            jsonWriter.close();
+            System.out.println("Saved to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads workroom from file
+    private void loadManagementList() {
+        try {
+            properties = jsonReader.read();
+            System.out.println("Loaded from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
     }
 
 

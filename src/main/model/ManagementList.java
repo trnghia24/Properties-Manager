@@ -1,10 +1,14 @@
 package model;
 
 // Represents a list of properties to be managed
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writeable;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class ManagementList {
+public class ManagementList implements Writeable {
     List<Property> myList;
 
     public ManagementList() {
@@ -84,6 +88,26 @@ public class ManagementList {
             }
         }
         return null;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", "My property list");
+        json.put("properties", propertiesToJson());
+        return json;
+    }
+
+
+    // EFFECTS: returns properties in this management list as a JSON array
+    public JSONArray propertiesToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Property p: myList) {
+            jsonArray.put(p.toJson());
+        }
+
+        return jsonArray;
     }
 }
 

@@ -1,8 +1,11 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writeable;
+
 // Represent a property having an address, monthly rental price (in dollars), capacity of tenants, status (available
 // or rented) and if the rent has been paid or not
-public class Property {
+public class Property implements Writeable {
     private String address;
     private Double price;
     private Integer capacity;
@@ -54,4 +57,14 @@ public class Property {
         return paid;
     }
 
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("address", address);
+        json.put("price", price);
+        json.put("capacity", capacity);
+        json.put("status", status);
+        json.put("paid?", paid);
+        return json;
+    }
 }
