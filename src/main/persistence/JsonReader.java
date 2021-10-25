@@ -1,7 +1,6 @@
 package persistence;
 
 
-import com.sun.tools.javah.Mangle;
 import model.Property;
 import model.ManagementList;
 
