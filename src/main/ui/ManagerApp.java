@@ -263,6 +263,8 @@ public class ManagerApp {
         displayProperty(address);
     }
 
+    // This method references code from this repo
+    // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
     // EFFECTS: saves the management list to file
     private void saveManagementList() {
         try {
@@ -275,8 +277,10 @@ public class ManagerApp {
         }
     }
 
+    // This method references code from this repo
+    // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
     // MODIFIES: this
-    // EFFECTS: loads workroom from file
+    // EFFECTS: loads management list from file
     private void loadManagementList() {
         try {
             properties = jsonReader.read();

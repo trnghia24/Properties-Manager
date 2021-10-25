@@ -91,6 +91,8 @@ public class ManagementList implements Writeable {
     }
 
     @Override
+    // This method references code from this repo
+    // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("name", "My property list");
@@ -99,6 +101,8 @@ public class ManagementList implements Writeable {
     }
 
 
+    // This method references code from this repo
+    // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
     // EFFECTS: returns properties in this management list as a JSON array
     public JSONArray propertiesToJson() {
         JSONArray jsonArray = new JSONArray();

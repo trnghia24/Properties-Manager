@@ -13,7 +13,9 @@ import java.util.stream.Stream;
 
 import org.json.*;
 
-// Represents a reader that reads workroom from JSON data stored in file
+// This class references code from this repo
+// https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
+// Represents a reader that reads management list from JSON data stored in file
 public class JsonReader {
     private String source;
 
@@ -22,7 +24,7 @@ public class JsonReader {
         this.source = source;
     }
 
-    // EFFECTS: reads workroom from file and returns it;
+    // EFFECTS: reads management list from file and returns it;
     // throws IOException if an error occurs reading data from file
     public ManagementList read() throws IOException {
         String jsonData = readFile(source);
@@ -41,7 +43,7 @@ public class JsonReader {
         return contentBuilder.toString();
     }
 
-    // EFFECTS: parses workroom from JSON object and returns it
+    // EFFECTS: parses management list from JSON object and returns it
     private ManagementList parseManagementList(JSONObject jsonObject) {
         String name = jsonObject.getString("name");
         ManagementList list = new ManagementList();
@@ -50,7 +52,7 @@ public class JsonReader {
     }
 
     // MODIFIES: list
-    // EFFECTS: parses thingies from JSON object and adds them to workroom
+    // EFFECTS: parses properties from JSON object and adds them to management list
     private void addProperties(ManagementList list, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("properties");
         for (Object json : jsonArray) {
@@ -60,7 +62,7 @@ public class JsonReader {
     }
 
     // MODIFIES: list
-    // EFFECTS: parses thingy from JSON object and adds it to workroom
+    // EFFECTS: parses property from JSON object and adds it to management list
     private void addProperty(ManagementList list, JSONObject jsonObject) {
         String address = jsonObject.getString("address");
         Double price = jsonObject.getDouble("price");
