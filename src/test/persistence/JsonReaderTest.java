@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 // This class references code from this repo
 // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
-public class JsonReadertest extends JsonTest {
+public class JsonReaderTest extends JsonTest {
 
     @Test
     void testReaderNonExistentFile() {
