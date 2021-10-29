@@ -66,8 +66,8 @@ public class ManagerApp {
         System.out.println("\tdelete -> Delete a property from management list");
         System.out.println("\tview -> View details of a property");
         System.out.println("\tupdate -> Update a property's information");
-        System.out.println("\tsave -> save work room to file");
-        System.out.println("\tload -> load work room from file");
+        System.out.println("\tsave -> Save management list to file");
+        System.out.println("\tload -> Load management list from file");
         System.out.println("\tquit -> Quit");
     }
 
