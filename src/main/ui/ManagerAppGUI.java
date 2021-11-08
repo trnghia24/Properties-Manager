@@ -9,7 +9,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ManagerAppGUI extends JPanel implements ListSelectionListener {
+public class ManagerAppGUI extends JFrame {
 
 //    // This class references code from this repo
 //    // https://github.students.cs.ubc.ca/CPSC210/TellerApp.git
@@ -292,206 +292,286 @@ public class ManagerAppGUI extends JPanel implements ListSelectionListener {
 //        }
 //    }
 
-    private JList list;
-    private DefaultListModel listModel;
-
-    private static final String addString = "Add";
-    private static final String removeString = "Remove";
+//    private JList list;
+//    private DefaultListModel listModel;
+//
+//    private static final String addString = "Add";
+//    private static final String removeString = "Remove";
+//    private JButton removeButton;
+//    private JTextField address;
+//
+//    public ManagerAppGUI() {
+//        super(new BorderLayout());
+//
+//        listModel = new DefaultListModel();
+//        listModel.addElement("Jane Doe");
+//        listModel.addElement("John Smith");
+//        listModel.addElement("Kathy Green");
+//
+//        //Create the list and put it in a scroll pane.
+//        list = new JList(listModel);
+//        list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+//        list.setSelectedIndex(0);
+//        list.addListSelectionListener(this);
+//        list.setVisibleRowCount(5);
+//        JScrollPane listScrollPane = new JScrollPane(list);
+//
+//        JButton addButton = new JButton(addString);
+//        AddListener addListener = new AddListener(addButton);
+//        addButton.setActionCommand(addString);
+//        addButton.addActionListener(addListener);
+//        addButton.setEnabled(false);
+//
+//        removeButton = new JButton(removeString);
+//        removeButton.setActionCommand(removeString);
+//        removeButton.addActionListener(new RemoveListener());
+//
+//        address = new JTextField(10);
+//        address.addActionListener(addListener);
+//        address.getDocument().addDocumentListener(addListener);
+//        String name = listModel.getElementAt(
+//                list.getSelectedIndex()).toString();
+//
+//        //Create a panel that uses BoxLayout.
+//        JPanel buttonPane = new JPanel();
+//        buttonPane.setLayout(new BoxLayout(buttonPane,
+//                BoxLayout.LINE_AXIS));
+//        buttonPane.add(removeButton);
+//        buttonPane.add(Box.createHorizontalStrut(5));
+//        buttonPane.add(new JSeparator(SwingConstants.VERTICAL));
+//        buttonPane.add(Box.createHorizontalStrut(5));
+//        buttonPane.add(address);
+//        buttonPane.add(addButton);
+//        buttonPane.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
+//
+//        add(listScrollPane, BorderLayout.CENTER);
+//        add(buttonPane, BorderLayout.PAGE_END);
+//    }
+//
+//    class RemoveListener implements ActionListener {
+//        public void actionPerformed(ActionEvent e) {
+//            //This method can be called only if
+//            //there's a valid selection
+//            //so go ahead and remove whatever's selected.
+//            int index = list.getSelectedIndex();
+//            listModel.remove(index);
+//
+//            int size = listModel.getSize();
+//
+//            if (size == 0) { //Nobody's left, disable firing.
+//                removeButton.setEnabled(false);
+//
+//            } else { //Select an index.
+//                if (index == listModel.getSize()) {
+//                    //removed item in last position
+//                    index--;
+//                }
+//
+//                list.setSelectedIndex(index);
+//                list.ensureIndexIsVisible(index);
+//            }
+//        }
+//    }
+//
+//    //This listener is shared by the text field and the hire button.
+//    class AddListener implements ActionListener, DocumentListener {
+//        private boolean alreadyEnabled = false;
+//        private JButton button;
+//
+//        public AddListener(JButton button) {
+//            this.button = button;
+//        }
+//
+//        //Required by ActionListener.
+//        public void actionPerformed(ActionEvent e) {
+//            String name = address.getText();
+//
+//            //User didn't type in a unique name...
+//            if (name.equals("") || alreadyInList(name)) {
+//                Toolkit.getDefaultToolkit().beep();
+//                address.requestFocusInWindow();
+//                address.selectAll();
+//                return;
+//            }
+//
+//            int index = list.getSelectedIndex(); //get selected index
+//            if (index == -1) { //no selection, so insert at beginning
+//                index = 0;
+//            } else {           //add after the selected item
+//                index++;
+//            }
+//
+//            listModel.insertElementAt(address.getText(), index);
+//            //If we just wanted to add to the end, we'd do this:
+//            //listModel.addElement(employeeName.getText());
+//
+//            //Reset the text field.
+//            address.requestFocusInWindow();
+//            address.setText("");
+//
+//            //Select the new item and make it visible.
+//            list.setSelectedIndex(index);
+//            list.ensureIndexIsVisible(index);
+//        }
+//
+//        //This method tests for string equality. You could certainly
+//        //get more sophisticated about the algorithm.  For example,
+//        //you might want to ignore white space and capitalization.
+//        protected boolean alreadyInList(String name) {
+//            return listModel.contains(name);
+//        }
+//
+//        //Required by DocumentListener.
+//        public void insertUpdate(DocumentEvent e) {
+//            enableButton();
+//        }
+//
+//        //Required by DocumentListener.
+//        public void removeUpdate(DocumentEvent e) {
+//            handleEmptyTextField(e);
+//        }
+//
+//        //Required by DocumentListener.
+//        public void changedUpdate(DocumentEvent e) {
+//            if (!handleEmptyTextField(e)) {
+//                enableButton();
+//            }
+//        }
+//
+//        private void enableButton() {
+//            if (!alreadyEnabled) {
+//                button.setEnabled(true);
+//            }
+//        }
+//
+//        private boolean handleEmptyTextField(DocumentEvent e) {
+//            if (e.getDocument().getLength() <= 0) {
+//                button.setEnabled(false);
+//                alreadyEnabled = false;
+//                return true;
+//            }
+//            return false;
+//        }
+//    }
+//
+//    //This method is required by ListSelectionListener.
+//    public void valueChanged(ListSelectionEvent e) {
+//        if (e.getValueIsAdjusting() == false) {
+//
+//            if (list.getSelectedIndex() == -1) {
+//                //No selection, disable fire button.
+//                removeButton.setEnabled(false);
+//
+//            } else {
+//                //Selection, enable the fire button.
+//                removeButton.setEnabled(true);
+//            }
+//        }
+//    }
+//
+//    /**
+//     * Create the GUI and show it.  For thread safety,
+//     * this method should be invoked from the
+//     * event-dispatching thread.
+//     */
+//    public static void createAndShowGUI() {
+//        //Create and set up the window.
+//        JFrame frame = new JFrame("Property Manager");
+//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//
+//        //Create and set up the content pane.
+//        JComponent newContentPane = new ManagerAppGUI();
+//        newContentPane.setOpaque(true); //content panes must be opaque
+//        frame.setContentPane(newContentPane);
+//
+//        //Display the window.
+//        frame.pack();
+//        frame.setVisible(true);
+//    }
+    private static final int SCREEN_HEIGHT = 500;
+    private static final int SCREEN_WIDTH = 500;
+    private JButton addButton;
     private JButton removeButton;
-    private JTextField address;
+    private JButton viewButton;
+    private JButton saveButton;
+    private JButton loadButton;
+    private JPanel buttonBar;
+    private JTextField textField;
 
-    public ManagerAppGUI() {
-        super(new BorderLayout());
-
-        listModel = new DefaultListModel();
-        listModel.addElement("Jane Doe");
-        listModel.addElement("John Smith");
-        listModel.addElement("Kathy Green");
-
-        //Create the list and put it in a scroll pane.
-        list = new JList(listModel);
-        list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        list.setSelectedIndex(0);
-        list.addListSelectionListener(this);
-        list.setVisibleRowCount(5);
-        JScrollPane listScrollPane = new JScrollPane(list);
-
-        JButton addButton = new JButton(addString);
-        AddListener addListener = new AddListener(addButton);
-        addButton.setActionCommand(addString);
-        addButton.addActionListener(addListener);
-        addButton.setEnabled(false);
-
-        removeButton = new JButton(removeString);
-        removeButton.setActionCommand(removeString);
-        removeButton.addActionListener(new RemoveListener());
-
-        address = new JTextField(10);
-        address.addActionListener(addListener);
-        address.getDocument().addDocumentListener(addListener);
-        String name = listModel.getElementAt(
-                list.getSelectedIndex()).toString();
-
-        //Create a panel that uses BoxLayout.
-        JPanel buttonPane = new JPanel();
-        buttonPane.setLayout(new BoxLayout(buttonPane,
-                BoxLayout.LINE_AXIS));
-        buttonPane.add(removeButton);
-        buttonPane.add(Box.createHorizontalStrut(5));
-        buttonPane.add(new JSeparator(SwingConstants.VERTICAL));
-        buttonPane.add(Box.createHorizontalStrut(5));
-        buttonPane.add(address);
-        buttonPane.add(addButton);
-        buttonPane.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
-
-        add(listScrollPane, BorderLayout.CENTER);
-        add(buttonPane, BorderLayout.PAGE_END);
-    }
-
-    class RemoveListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            //This method can be called only if
-            //there's a valid selection
-            //so go ahead and remove whatever's selected.
-            int index = list.getSelectedIndex();
-            listModel.remove(index);
-
-            int size = listModel.getSize();
-
-            if (size == 0) { //Nobody's left, disable firing.
-                removeButton.setEnabled(false);
-
-            } else { //Select an index.
-                if (index == listModel.getSize()) {
-                    //removed item in last position
-                    index--;
-                }
-
-                list.setSelectedIndex(index);
-                list.ensureIndexIsVisible(index);
-            }
-        }
-    }
-
-    //This listener is shared by the text field and the hire button.
-    class AddListener implements ActionListener, DocumentListener {
-        private boolean alreadyEnabled = false;
-        private JButton button;
-
-        public AddListener(JButton button) {
-            this.button = button;
-        }
-
-        //Required by ActionListener.
-        public void actionPerformed(ActionEvent e) {
-            String name = address.getText();
-
-            //User didn't type in a unique name...
-            if (name.equals("") || alreadyInList(name)) {
-                Toolkit.getDefaultToolkit().beep();
-                address.requestFocusInWindow();
-                address.selectAll();
-                return;
-            }
-
-            int index = list.getSelectedIndex(); //get selected index
-            if (index == -1) { //no selection, so insert at beginning
-                index = 0;
-            } else {           //add after the selected item
-                index++;
-            }
-
-            listModel.insertElementAt(address.getText(), index);
-            //If we just wanted to add to the end, we'd do this:
-            //listModel.addElement(employeeName.getText());
-
-            //Reset the text field.
-            address.requestFocusInWindow();
-            address.setText("");
-
-            //Select the new item and make it visible.
-            list.setSelectedIndex(index);
-            list.ensureIndexIsVisible(index);
-        }
-
-        //This method tests for string equality. You could certainly
-        //get more sophisticated about the algorithm.  For example,
-        //you might want to ignore white space and capitalization.
-        protected boolean alreadyInList(String name) {
-            return listModel.contains(name);
-        }
-
-        //Required by DocumentListener.
-        public void insertUpdate(DocumentEvent e) {
-            enableButton();
-        }
-
-        //Required by DocumentListener.
-        public void removeUpdate(DocumentEvent e) {
-            handleEmptyTextField(e);
-        }
-
-        //Required by DocumentListener.
-        public void changedUpdate(DocumentEvent e) {
-            if (!handleEmptyTextField(e)) {
-                enableButton();
-            }
-        }
-
-        private void enableButton() {
-            if (!alreadyEnabled) {
-                button.setEnabled(true);
-            }
-        }
-
-        private boolean handleEmptyTextField(DocumentEvent e) {
-            if (e.getDocument().getLength() <= 0) {
-                button.setEnabled(false);
-                alreadyEnabled = false;
-                return true;
-            }
-            return false;
-        }
-    }
-
-    //This method is required by ListSelectionListener.
-    public void valueChanged(ListSelectionEvent e) {
-        if (e.getValueIsAdjusting() == false) {
-
-            if (list.getSelectedIndex() == -1) {
-                //No selection, disable fire button.
-                removeButton.setEnabled(false);
-
-            } else {
-                //Selection, enable the fire button.
-                removeButton.setEnabled(true);
-            }
-        }
-    }
-
-    /**
-     * Create the GUI and show it.  For thread safety,
-     * this method should be invoked from the
-     * event-dispatching thread.
-     */
-    public static void createAndShowGUI() {
-        //Create and set up the window.
-        JFrame frame = new JFrame("Property Manager");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        //Create and set up the content pane.
-        JComponent newContentPane = new ManagerAppGUI();
-        newContentPane.setOpaque(true); //content panes must be opaque
-        frame.setContentPane(newContentPane);
-
-        //Display the window.
-        frame.pack();
-        frame.setVisible(true);
+    ManagerAppGUI() {
+        init();
+        createFrame();
     }
 
 
+    //Initialize the buttons and text fields
+    private void init() {
+        addButton = new JButton();
+        addButton.setText("Add");
+        addButton.setFocusable(false);
+        addButton.setOpaque(true);
+        addButton.setBackground(Color.LIGHT_GRAY);
+//        addButton.addActionListener(new AddListener());
+
+        removeButton = new JButton();
+        removeButton.setText("Remove");
+        removeButton.setFocusable(false);
+        removeButton.setOpaque(true);
+        removeButton.setBackground(Color.LIGHT_GRAY);
+//        removeButton.addActionListener(new RemoveListener());
+
+        viewButton = new JButton();
+        viewButton.setText("View");
+        viewButton.setFocusable(false);
+        viewButton.setOpaque(true);
+        viewButton.setBackground(Color.LIGHT_GRAY);
+//        viewButton.addActionListener(new RemoveListener());
+
+        saveButton = new JButton();
+        saveButton.setText("Save");
+        saveButton.setFocusable(false);
+        saveButton.setOpaque(true);
+        saveButton.setBackground(Color.LIGHT_GRAY);
+//        saveButton.addActionListener(new RemoveListener());
+
+        loadButton = new JButton();
+        loadButton.setText("Load");
+        loadButton.setFocusable(false);
+        loadButton.setOpaque(true);
+        loadButton.setBackground(Color.LIGHT_GRAY);
+//        loadButton.addActionListener(new RemoveListener());
+
+        buttonBar = new JPanel();
+        buttonBar.setPreferredSize(new Dimension(SCREEN_WIDTH / 10, SCREEN_HEIGHT / 10));
+        buttonBar.setBackground(Color.LIGHT_GRAY);
+        buttonBar.setOpaque(true);
+        buttonBar.setLayout(new FlowLayout());
+        buttonBar.add(addButton);
+        buttonBar.add(removeButton);
+        buttonBar.add(viewButton);
+        buttonBar.add(saveButton);
+        buttonBar.add(loadButton);
 
 
+    }
+
+//    class AddListener {
+//
+//    }
+
+
+
+
+    private void createFrame() {
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setSize(SCREEN_WIDTH,SCREEN_HEIGHT);
+        this.setLayout(new BorderLayout());
+
+
+        this.add(buttonBar, BorderLayout.SOUTH);
+
+        this.setVisible(true);
+    }
 }
 
 
