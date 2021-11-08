@@ -19,6 +19,6 @@ complicated and cumbersome.
 - As a user, I want to be able to change the rental status (rented or available), the payment status (paid or unpaid) 
 and change the rental price if necessary.
 - As a user, I want to be able to save my management list to file.
-- As a user, I want to be able to load my managment list from file.
+- As a user, I want to be able to load my management list from file.
 
 

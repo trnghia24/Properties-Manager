@@ -3,8 +3,8 @@
     "properties": [{
         "address": "1 ubc",
         "paid?": false,
-        "price": 2000,
-        "capacity": 3,
+        "price": 500,
+        "capacity": 2,
         "status": true
     }]
 }
