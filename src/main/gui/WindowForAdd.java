@@ -1,6 +1,7 @@
 //package gui;
 //
-//import ui.ManagerApp;
+//import model.ManagementList;
+//import model.Property;
 //import ui.ManagerAppGUI;
 //
 //import javax.swing.*;
@@ -9,7 +10,6 @@
 //import java.awt.event.ActionListener;
 //
 //public class WindowForAdd {
-//    private ManagerAppGUI app;
 //    private JFrame frame;
 //
 //    private JPanel addressPanel;
@@ -53,15 +53,16 @@
 //
 //        createButtonPanel();
 //
+//
 //    }
 //
 //    private void createButtonPanel() {
 //        buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 //
 //        addButton = new JButton("Add");
-////        addButton.addActionListener(new AddListner());
+//        addButton.addActionListener(new ManagerAppGUI.WindowForAdd.AddListener());
 //        backButton = new JButton("Back");
-//        backButton.addActionListener(new BackListener());
+//        backButton.addActionListener(new ManagerAppGUI.WindowForAdd.BackListener());
 //
 //        buttonPanel.setSize(new Dimension(ManagerAppGUI.SCREEN_WIDTH, ManagerAppGUI.SCREEN_HEIGHT / 10));
 //        buttonPanel.setBackground(Color.LIGHT_GRAY);
@@ -165,10 +166,30 @@
 //
 //    }
 //
-//    class AddListener implements  ActionListener {
+//    class AddListener implements ActionListener {
 //        @Override
 //        public void actionPerformed(ActionEvent e) {
 //            if (e.getSource() == addButton) {
+//
+//                Property p = new Property();
+//                p.setAddress(addressField.getText());
+//
+//                Double price = Double.valueOf(priceField.getText());
+//                p.setPrice(price);
+//
+//                Integer capacity = Integer.valueOf(capacityField.getText());
+//                p.setCapacity(capacity);
+//
+//                Boolean status = Boolean.valueOf(statusField.getText());
+//                p.setStatus(status);
+//
+//                Boolean paid = Boolean.valueOf(payField.getText());
+//                p.setPaid(paid);
+//
+//                properties.addProperty(p);
+//
+//                System.out.println(properties.getProperties().size()); // for testing purpose
+//
 //
 //            }
 //
@@ -180,7 +201,6 @@
 //        public void actionPerformed(ActionEvent e) {
 //            if (e.getSource() == backButton) {
 //                frame.dispose();
-//                new ManagerAppGUI();
 //            }
 //        }
 //    }

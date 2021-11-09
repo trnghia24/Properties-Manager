@@ -7,6 +7,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import persistence.JsonReader;
+import persistence.JsonWriter;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.SQLOutput;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class ManagerAppGUI {
 
@@ -25,11 +34,14 @@ public class ManagerAppGUI {
     private JButton saveButton;
     private JButton loadButton;
     private JButton showButton;
-
     
     private JPanel buttonBar;
 
-    public ManagerAppGUI() {
+    private static final String JSON_STORE = "./data/managementlist.json";
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
+
+    public ManagerAppGUI() throws FileNotFoundException {
         init();
         createFrame();
     }
@@ -38,6 +50,8 @@ public class ManagerAppGUI {
     //Initialize the buttons and text fields
     private void init() {
         properties = new ManagementList();
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
 
         addButton = new JButton();
         addButton.setText("Add");
@@ -65,14 +79,14 @@ public class ManagerAppGUI {
         saveButton.setFocusable(false);
         saveButton.setOpaque(true);
         saveButton.setBackground(Color.LIGHT_GRAY);
-//        saveButton.addActionListener(new RemoveListener());
+        saveButton.addActionListener(new SaveListener());
 
         loadButton = new JButton();
         loadButton.setText("Load");
         loadButton.setFocusable(false);
         loadButton.setOpaque(true);
         loadButton.setBackground(Color.LIGHT_GRAY);
-//        loadButton.addActionListener(new RemoveListener());
+        loadButton.addActionListener(new LoadListener());
 
         showButton = new JButton();
         showButton.setText("Show");
@@ -153,6 +167,32 @@ public class ManagerAppGUI {
         }
     }
 
+    class SaveListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            try {
+                jsonWriter.open();
+                jsonWriter.write(properties);
+                jsonWriter.close();
+                System.out.println("Saved to " + JSON_STORE);
+            } catch (FileNotFoundException exception) {
+                System.out.println("Unable to write to file: " + JSON_STORE);
+            }
+        }
+    }
+
+    class LoadListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            try {
+                properties = jsonReader.read();
+                System.out.println("Loaded from " + JSON_STORE);
+            } catch (IOException exception) {
+                System.out.println("Unable to read from file: " + JSON_STORE);
+            }
+        }
+    }
+
     class RemoveWindow {
         private JFrame frame;
 
@@ -207,13 +247,7 @@ public class ManagerAppGUI {
 
             frame.add(removePanel);
             frame.setVisible(true);
-
-
         }
-
-
-
-
     }
 
     class WindowForAdd {
@@ -259,7 +293,7 @@ public class ManagerAppGUI {
             createPayPanel();
 
             createButtonPanel();
-           
+
 
         }
 
@@ -396,7 +430,7 @@ public class ManagerAppGUI {
                     properties.addProperty(p);
 
                     System.out.println(properties.getProperties().size()); // for testing purpose
-                    
+
 
                 }
 
@@ -428,6 +462,10 @@ public class ManagerAppGUI {
 
 
         frame.setVisible(true);
+    }
+
+    public ManagementList getManagementList() {
+        return properties;
     }
 }
 
