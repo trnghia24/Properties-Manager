@@ -1,10 +1,19 @@
 {
     "name": "My property list",
-    "properties": [{
-        "address": "2 sfu",
-        "paid?": true,
-        "price": 5000,
-        "capacity": 6,
-        "status": false
-    }]
+    "properties": [
+        {
+            "address": "2 sfu",
+            "paid?": false,
+            "price": 4000,
+            "capacity": 5,
+            "status": false
+        },
+        {
+            "address": "3 bcit",
+            "paid?": true,
+            "price": 1200,
+            "capacity": 3,
+            "status": false
+        }
+    ]
 }

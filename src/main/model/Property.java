@@ -57,6 +57,11 @@ public class Property implements Writeable {
         return paid;
     }
 
+    public String displayInfo() {
+        return "Address: " + getAddress() + "; Price: " + getPrice() + "; Rented? " + getStatus()
+                + "; Tenants:" + getCapacity() + "; Paid?" + getPaid();
+    }
+
     @Override
     // This method references code from this repo
     // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git

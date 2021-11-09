@@ -155,13 +155,8 @@ public class ManagerAppGUI {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == showButton) {
-                for (Property p: properties.getProperties()) {
-                    System.out.println(p.getAddress());
-                    System.out.println(p.getPrice());
-                    System.out.println(p.getCapacity());
-                    System.out.println(p.getStatus());
-                    System.out.println(p.getPaid());
-                }
+                new ShowWindow();
+
             }
 
         }
@@ -447,6 +442,54 @@ public class ManagerAppGUI {
         }
 
 
+
+    }
+
+    class ShowWindow {
+        private JList<String> listToShow;
+        private JPanel showPanel;
+        private JFrame frame;
+
+        ShowWindow() {
+            setUpFrame();
+        }
+
+        private void setUpFrame() {
+            frame = new JFrame();
+            frame.setSize(SCREEN_WIDTH,SCREEN_HEIGHT);
+            frame.setLayout(new FlowLayout());
+
+            setUpShowPanel();
+
+            
+            frame.add(showPanel);
+            
+            frame.setVisible(true);
+
+
+        }
+        
+        private void setUpShowPanel() {
+            showPanel = new JPanel();
+            showPanel.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
+            showPanel.setBackground(Color.LIGHT_GRAY);
+            showPanel.setOpaque(true);
+            showPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+
+            showProperties();
+
+            showPanel.add(listToShow);
+        }
+
+        private void showProperties() {
+            DefaultListModel<String> list = new DefaultListModel();
+            for (Property p: properties.getProperties()) {
+                list.addElement(p.displayInfo());
+            }
+
+            listToShow = new JList(list);
+
+        }
 
     }
 

@@ -1,17 +1,16 @@
 //package gui;
 //
-//import model.ManagementList;
 //import model.Property;
 //import ui.ManagerAppGUI;
+//import ui.ManagerAppGUI2;
 //
 //import javax.swing.*;
 //import java.awt.*;
 //import java.awt.event.ActionEvent;
 //import java.awt.event.ActionListener;
+//import java.io.FileNotFoundException;
 //
-//public class WindowForAdd {
-//    private JFrame frame;
-//
+//public class WindowForAdd extends ManagerAppGUI2 {
 //    private JPanel addressPanel;
 //    private JPanel pricePanel;
 //    private JPanel capacityPanel;
@@ -29,7 +28,7 @@
 //    private JButton addButton;
 //    private JButton backButton;
 //
-//    public WindowForAdd() {
+//    public WindowForAdd() throws FileNotFoundException {
 //        setUpFrame();
 //    }
 //
@@ -60,9 +59,9 @@
 //        buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 //
 //        addButton = new JButton("Add");
-//        addButton.addActionListener(new ManagerAppGUI.WindowForAdd.AddListener());
+//        addButton.addActionListener(new AddListener());
 //        backButton = new JButton("Back");
-//        backButton.addActionListener(new ManagerAppGUI.WindowForAdd.BackListener());
+////        backButton.addActionListener(new ManagerAppGUI.WindowForAdd.BackListener());
 //
 //        buttonPanel.setSize(new Dimension(ManagerAppGUI.SCREEN_WIDTH, ManagerAppGUI.SCREEN_HEIGHT / 10));
 //        buttonPanel.setBackground(Color.LIGHT_GRAY);
@@ -147,22 +146,22 @@
 //    }
 //
 //    private void setUpFrame() {
-//        frame = new JFrame("Adding Property");
-////        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        frame.setLayout((new FlowLayout(FlowLayout.LEADING)));
-//        frame.setSize(ManagerAppGUI.SCREEN_WIDTH, ManagerAppGUI.SCREEN_HEIGHT);
+//        this.setTitle("Adding property");
+////        this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
+//        this.setLayout((new FlowLayout(FlowLayout.LEADING)));
+//        this.setSize(ManagerAppGUI.SCREEN_WIDTH, ManagerAppGUI.SCREEN_HEIGHT);
 //
 //        setUpPanels();
 //
 //
-//        frame.add(addressPanel);
-//        frame.add(pricePanel);
-//        frame.add(capacityPanel);
-//        frame.add(statusPanel);
-//        frame.add(payPanel);
-//        frame.add(buttonPanel);
+//        this.add(addressPanel);
+//        this.add(pricePanel);
+//        this.add(capacityPanel);
+//        this.add(statusPanel);
+//        this.add(payPanel);
+//        this.add(buttonPanel);
 //
-//        frame.setVisible(true);
+//        this.setVisible(true);
 //
 //    }
 //
@@ -196,14 +195,14 @@
 //        }
 //    }
 //
-//    class BackListener implements ActionListener {
-//        @Override
-//        public void actionPerformed(ActionEvent e) {
-//            if (e.getSource() == backButton) {
-//                frame.dispose();
-//            }
-//        }
-//    }
+////    class BackListener implements ActionListener {
+////        @Override
+////        public void actionPerformed(ActionEvent e) {
+////            if (e.getSource() == backButton) {
+////                this.dispose();
+////            }
+////        }
+////    }
 //
 //
 //
