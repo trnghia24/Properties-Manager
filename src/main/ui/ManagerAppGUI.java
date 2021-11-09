@@ -1,5 +1,9 @@
 package ui;
 
+
+import model.ManagementList;
+import model.Property;
+
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -8,8 +12,9 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.lang.reflect.Array;
 
-public class ManagerAppGUI extends JFrame {
+public class ManagerAppGUI {
 
 //    // This class references code from this repo
 //    // https://github.students.cs.ubc.ca/CPSC210/TellerApp.git
@@ -488,17 +493,30 @@ public class ManagerAppGUI extends JFrame {
 //        frame.pack();
 //        frame.setVisible(true);
 //    }
-    private static final int SCREEN_HEIGHT = 500;
-    private static final int SCREEN_WIDTH = 500;
+    public static final int SCREEN_HEIGHT = 500;
+    public static final int SCREEN_WIDTH = 500;
+
+    private ManagementList properties;
+    Property propertyToView;
+    
+    private JFrame frame;
+    
     private JButton addButton;
     private JButton removeButton;
     private JButton viewButton;
     private JButton saveButton;
     private JButton loadButton;
+    private JButton showButton;
+    
+    private JButton searchButton;
+    private JTextField searchField;
+    private JPanel searchPanel;
+    
     private JPanel buttonBar;
-    private JTextField textField;
+    
+    private JPanel testPanel;
 
-    ManagerAppGUI() {
+    public ManagerAppGUI() {
         init();
         createFrame();
     }
@@ -506,26 +524,28 @@ public class ManagerAppGUI extends JFrame {
 
     //Initialize the buttons and text fields
     private void init() {
+        properties = new ManagementList();
+
         addButton = new JButton();
         addButton.setText("Add");
         addButton.setFocusable(false);
         addButton.setOpaque(true);
         addButton.setBackground(Color.LIGHT_GRAY);
-//        addButton.addActionListener(new AddListener());
+        addButton.addActionListener(new AddListener());
 
         removeButton = new JButton();
         removeButton.setText("Remove");
         removeButton.setFocusable(false);
         removeButton.setOpaque(true);
         removeButton.setBackground(Color.LIGHT_GRAY);
-//        removeButton.addActionListener(new RemoveListener());
+//      removeButton.addActionListener(new RemoveListener());
 
         viewButton = new JButton();
         viewButton.setText("View");
         viewButton.setFocusable(false);
         viewButton.setOpaque(true);
         viewButton.setBackground(Color.LIGHT_GRAY);
-//        viewButton.addActionListener(new RemoveListener());
+//        viewButton.addActionListener(new ViewListener());
 
         saveButton = new JButton();
         saveButton.setText("Save");
@@ -541,6 +561,14 @@ public class ManagerAppGUI extends JFrame {
         loadButton.setBackground(Color.LIGHT_GRAY);
 //        loadButton.addActionListener(new RemoveListener());
 
+        showButton = new JButton();
+        showButton.setText("Show");
+        showButton.setFocusable(false);
+        showButton.setOpaque(true);
+        showButton.setBackground(Color.LIGHT_GRAY);
+        showButton.addActionListener(new ShowListener());
+
+
         buttonBar = new JPanel();
         buttonBar.setPreferredSize(new Dimension(SCREEN_WIDTH / 10, SCREEN_HEIGHT / 10));
         buttonBar.setBackground(Color.LIGHT_GRAY);
@@ -551,26 +579,318 @@ public class ManagerAppGUI extends JFrame {
         buttonBar.add(viewButton);
         buttonBar.add(saveButton);
         buttonBar.add(loadButton);
+        buttonBar.add(showButton);
+        
+        searchButton = new JButton("Search");
+        searchButton.setFocusable(false);
+        searchButton.setOpaque(true);
+        searchButton.setBackground(Color.WHITE);
+        searchField = new JTextField();
+        searchField.setPreferredSize(new Dimension(ManagerAppGUI.SCREEN_WIDTH / 2,
+                ManagerAppGUI.SCREEN_HEIGHT / 10 - 10));
+        searchPanel = new JPanel();
+        searchPanel.setPreferredSize(new Dimension(SCREEN_WIDTH / 10, SCREEN_HEIGHT / 10));
+        searchPanel.setBackground(Color.LIGHT_GRAY);
+        searchPanel.setOpaque(true);
+        searchPanel.setLayout(new FlowLayout());
+        searchPanel.add(searchField);
+        searchPanel.add(searchButton);
+        searchPanel.setVisible(false);
+
+//        testPanel = new JPanel();
+//
+//        testPanel.setSize(new Dimension(100,100));
+//        testPanel.setBackground(Color.RED);
+//        testPanel.setOpaque(true);
+//        testPanel.setVisible(false);
 
 
     }
 
-//    class AddListener {
+    class AddListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (e.getSource() == addButton) {
+                new WindowForAdd();
+            }
+
+        }
+    }
+    
+//    class RemoveListener implements ActionListener {
 //
+//        @Override
+//        public void actionPerformed(ActionEvent e) {
+//            if (e.getSource() == removeButton) {
+//                searchPanel.setVisible(true);
+//
+//                if (e.getSource() == searchButton) {
+//                    String inputText = searchField.getText();
+//                    for (Property p : properties.getProperties()) {
+//                        if (inputText.equals(p.getAddress())) {
+//                            properties.deleteProperty(p);
+//                        }
+//
+//                    }
+//                    System.out.println(properties.getProperties().size()); //for testing purpose
+//
+//                }
+//
+//            }
+//        }
 //    }
+
+//    class ViewListener implements ActionListener {
+//        @Override
+//        public void actionPerformed(ActionEvent e) {
+//            if (e.getSource() == viewButton) {
+//                searchPanel.setVisible(true);
+//                String inputText = searchField.getText();
+//
+//
+//                for (Property p : properties.getProperties()) {
+//                    if (inputText.equals(p.getAddress())) {
+//                        propertyToView = p;
+//                    }
+//
+//                }
+//            }
+//
+//        }
+//    }
+
+    class ShowListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (e.getSource() == showButton) {
+                for (Property p: properties.getProperties()) {
+                    System.out.println(p.getAddress());
+                    System.out.println(p.getPrice());
+                    System.out.println(p.getCapacity());
+                    System.out.println(p.getStatus());
+                    System.out.println(p.getPaid());
+                }
+            }
+
+        }
+    }
+
+    class WindowForAdd {
+        private ManagerAppGUI app;
+        private JFrame frame;
+
+        private JPanel addressPanel;
+        private JPanel pricePanel;
+        private JPanel capacityPanel;
+        private JPanel statusPanel;
+        private JPanel payPanel;
+        private JPanel buttonPanel;
+
+
+        private JTextField addressField;
+        private JTextField priceField;
+        private JTextField capacityField;
+        private JTextField statusField;
+        private JTextField payField;
+
+        private JButton addButton;
+        private JButton backButton;
+
+        public WindowForAdd() {
+            setUpFrame();
+        }
+
+        private void setUpPanels() {
+            //
+            createAddressPanel();
+
+            //
+            createPricePanel();
+
+
+            //
+            createCapacityPanel();
+
+            //
+            createStatusPanel();
+
+
+            //
+            createPayPanel();
+
+            createButtonPanel();
+           
+
+        }
+
+        private void createButtonPanel() {
+            buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+
+            addButton = new JButton("Add");
+            addButton.addActionListener(new AddListener());
+            backButton = new JButton("Back");
+            backButton.addActionListener(new BackListener());
+
+            buttonPanel.setSize(new Dimension(ManagerAppGUI.SCREEN_WIDTH, ManagerAppGUI.SCREEN_HEIGHT / 10));
+            buttonPanel.setBackground(Color.LIGHT_GRAY);
+            buttonPanel.setOpaque(true);
+            buttonPanel.add(addButton);
+            buttonPanel.add(backButton);
+        }
+
+        private void createPayPanel() {
+            payField = new JTextField();
+            payField.setPreferredSize(new Dimension(ManagerAppGUI.SCREEN_WIDTH / 2,
+                    ManagerAppGUI.SCREEN_HEIGHT / 10 - 10));
+
+            JLabel payLabel = new JLabel("Enter if rent was paid (true/false):");
+            payPanel = new JPanel();
+
+            payPanel.setSize(new Dimension(ManagerAppGUI.SCREEN_WIDTH, ManagerAppGUI.SCREEN_HEIGHT / 10));
+            payPanel.setBackground(Color.LIGHT_GRAY);
+            payPanel.setOpaque(true);
+            payPanel.add(payLabel);
+            payPanel.add(payField);
+        }
+
+        private void createStatusPanel() {
+            statusField = new JTextField();
+            statusField.setPreferredSize(new Dimension(ManagerAppGUI.SCREEN_WIDTH / 2,
+                    ManagerAppGUI.SCREEN_HEIGHT / 10 - 10));
+
+            JLabel statusLabel = new JLabel("Enter status:");
+            statusPanel = new JPanel();
+
+            statusPanel.setSize(new Dimension(ManagerAppGUI.SCREEN_WIDTH, ManagerAppGUI.SCREEN_HEIGHT / 10));
+            statusPanel.setBackground(Color.LIGHT_GRAY);
+            statusPanel.setOpaque(true);
+            statusPanel.add(statusLabel);
+            statusPanel.add(statusField);
+        }
+
+        private void createCapacityPanel() {
+            capacityField = new JTextField();
+            capacityField.setPreferredSize(new Dimension(ManagerAppGUI.SCREEN_WIDTH / 2,
+                    ManagerAppGUI.SCREEN_HEIGHT / 10 - 10));
+
+            JLabel capacityLabel = new JLabel("Enter capacity:");
+            capacityPanel = new JPanel();
+
+            capacityPanel.setSize(new Dimension(ManagerAppGUI.SCREEN_WIDTH, ManagerAppGUI.SCREEN_HEIGHT / 10));
+            capacityPanel.setBackground(Color.LIGHT_GRAY);
+            capacityPanel.setOpaque(true);
+            capacityPanel.add(capacityLabel);
+            capacityPanel.add(capacityField);
+        }
+
+        private void createPricePanel() {
+            priceField = new JTextField();
+            priceField.setPreferredSize(new Dimension(ManagerAppGUI.SCREEN_WIDTH / 2,
+                    ManagerAppGUI.SCREEN_HEIGHT / 10 - 10));
+
+            JLabel priceLabel = new JLabel("Enter price:");
+            pricePanel = new JPanel();
+
+            pricePanel.setSize(new Dimension(ManagerAppGUI.SCREEN_WIDTH, ManagerAppGUI.SCREEN_HEIGHT / 10));
+            pricePanel.setBackground(Color.LIGHT_GRAY);
+            pricePanel.setOpaque(true);
+            pricePanel.add(priceLabel);
+            pricePanel.add(priceField);
+        }
+
+        private void createAddressPanel() {
+            addressField = new JTextField();
+            addressField.setPreferredSize(new Dimension(ManagerAppGUI.SCREEN_WIDTH / 2,
+                    ManagerAppGUI.SCREEN_HEIGHT / 10 - 10));
+
+            JLabel addressLabel = new JLabel("Enter address:");
+            addressPanel = new JPanel();
+
+            addressPanel.setSize(new Dimension(ManagerAppGUI.SCREEN_WIDTH, ManagerAppGUI.SCREEN_HEIGHT / 10));
+            addressPanel.setBackground(Color.LIGHT_GRAY);
+            addressPanel.setOpaque(true);
+            addressPanel.add(addressLabel);
+            addressPanel.add(addressField);
+        }
+
+        private void setUpFrame() {
+            frame = new JFrame("Adding Property");
+//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setLayout((new FlowLayout(FlowLayout.LEADING)));
+            frame.setSize(ManagerAppGUI.SCREEN_WIDTH, ManagerAppGUI.SCREEN_HEIGHT);
+
+            setUpPanels();
+
+
+            frame.add(addressPanel);
+            frame.add(pricePanel);
+            frame.add(capacityPanel);
+            frame.add(statusPanel);
+            frame.add(payPanel);
+            frame.add(buttonPanel);
+
+            frame.setVisible(true);
+
+        }
+
+        class AddListener implements ActionListener {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (e.getSource() == addButton) {
+                    Property p = new Property();
+                    p.setAddress(addressField.getText());
+
+                    Double price = Double.valueOf(priceField.getText());
+                    p.setPrice(price);
+
+                    Integer capacity = Integer.valueOf(capacityField.getText());
+                    p.setCapacity(capacity);
+
+                    Boolean status = Boolean.valueOf(statusField.getText());
+                    p.setStatus(status);
+
+                    Boolean paid = Boolean.valueOf(capacityField.getText());
+                    p.setPaid(paid);
+
+                    properties.addProperty(p);
+
+                    System.out.println(properties.getProperties().size()); // for testing purpose
+                    
+
+                }
+
+            }
+        }
+
+        class BackListener implements ActionListener {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (e.getSource() == backButton) {
+                    frame.dispose();
+                }
+            }
+        }
+
+
+
+    }
 
 
 
 
     private void createFrame() {
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(SCREEN_WIDTH,SCREEN_HEIGHT);
-        this.setLayout(new BorderLayout());
+        frame = new JFrame();
+        
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(SCREEN_WIDTH,SCREEN_HEIGHT);
+        frame.setLayout(new BorderLayout());
+
+        frame.add(searchPanel, BorderLayout.NORTH);
+        frame.add(buttonBar, BorderLayout.SOUTH);
 
 
-        this.add(buttonBar, BorderLayout.SOUTH);
-
-        this.setVisible(true);
+        frame.setVisible(true);
     }
 }
 
