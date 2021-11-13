@@ -9,17 +9,10 @@
             "status": true
         },
         {
-            "address": "2 ubc",
-            "paid?": false,
-            "price": 1400,
-            "capacity": 5,
-            "status": false
-        },
-        {
-            "address": "3 ubc",
+            "address": "1 sfu",
             "paid?": true,
             "price": 2000,
-            "capacity": 3,
+            "capacity": 2,
             "status": false
         }
     ]

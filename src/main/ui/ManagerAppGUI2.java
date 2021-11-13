@@ -40,6 +40,7 @@ public class ManagerAppGUI2 {
     private JButton showButton;
 
     private JPanel buttonBar;
+    private JLabel imageLabel;
 
     private static final String JSON_STORE = "./data/managementlist.json";
     private JsonWriter jsonWriter;
@@ -111,6 +112,13 @@ public class ManagerAppGUI2 {
         buttonBar.add(saveButton);
         buttonBar.add(loadButton);
         buttonBar.add(showButton);
+
+        imageLabel = new JLabel();
+        imageLabel.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT - SCREEN_HEIGHT / 10));
+        ImageIcon image = new ImageIcon(
+                "/Users/trnghia240/IdeaProjects/personal project/project_m7p3q/src/main/gui/screen logo.png");
+        imageLabel.setIcon(image);
+
 
 
     }
@@ -506,6 +514,7 @@ public class ManagerAppGUI2 {
         frame.setLayout(new BorderLayout());
 
         frame.add(buttonBar, BorderLayout.SOUTH);
+        frame.add(imageLabel, BorderLayout.NORTH);
 
 
         frame.setVisible(true);
