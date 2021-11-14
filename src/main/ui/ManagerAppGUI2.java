@@ -1,9 +1,7 @@
 package ui;
 
 
-import gui.RemoveWindow;
-import gui.ShowWindow;
-import gui.WindowForAdd;
+import gui.*;
 import model.ManagementList;
 import model.Property;
 
@@ -128,7 +126,7 @@ public class ManagerAppGUI2 {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == addButton) {
-                new WindowForAdd();
+                new AddWindow();
             }
 
         }
@@ -167,7 +165,7 @@ public class ManagerAppGUI2 {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == showButton) {
-                new ShowWindow();
+                new DisplayWindow();
 
             }
 

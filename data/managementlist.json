@@ -11,8 +11,8 @@
         {
             "address": "1 sfu",
             "paid?": true,
-            "price": 2000,
-            "capacity": 2,
+            "price": 4000,
+            "capacity": 5,
             "status": false
         }
     ]
