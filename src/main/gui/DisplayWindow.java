@@ -36,10 +36,16 @@ public class DisplayWindow extends JFrame {
                 if (personNumber >= 0) {
                     Property p = properties.getProperties().get(personNumber);
                     textAddress.setText(p.getAddress());
-                    textPrice.setText(Double.toString(p.getCapacity()));
+                    textPrice.setText(Double.toString(p.getPrice()));
                     textCapacity.setText(Integer.toString(p.getCapacity()));
                     textStatus.setText(Boolean.toString(p.getStatus()));
                     textPaid.setText(Boolean.toString(p.getPaid()));
+
+                    textAddress.setEditable(false);
+                    textPrice.setEditable(false);
+                    textCapacity.setEditable(false);
+                    textStatus.setEditable(false);
+                    textPaid.setEditable(false);
                 }
 
             }
