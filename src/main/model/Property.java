@@ -59,7 +59,7 @@ public class Property implements Writeable {
 
     public String displayInfo() {
         return "Address: " + getAddress() + "; Price: " + getPrice() + "; Rented? " + getStatus()
-                + "; Tenants:" + getCapacity() + "; Paid?" + getPaid();
+                + "; Tenants: " + getCapacity() + "; Paid? " + getPaid();
     }
 
     @Override

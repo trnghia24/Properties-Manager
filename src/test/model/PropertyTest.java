@@ -38,6 +38,13 @@ public class PropertyTest {
         assertEquals(p.getCapacity(),2);
     }
 
+    @Test
+    public void testDisplayInfo() {
+        assertTrue(p.displayInfo().
+                equals("Address: 2623 Wesbrook Mall; Price: 1000.0; Rented? true; Tenants: 2; Paid? true"));
+
+    }
+
 
 
 }
