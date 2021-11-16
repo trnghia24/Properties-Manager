@@ -2,14 +2,13 @@ package gui;
 
 import model.ManagementList;
 import model.Property;
-import ui.ManagerAppGUI;
 import ui.ManagerAppGUI2;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileNotFoundException;
+
 
 import static ui.ManagerAppGUI2.SCREEN_HEIGHT;
 import static ui.ManagerAppGUI2.SCREEN_WIDTH;
@@ -73,7 +72,7 @@ public class WindowForAdd {
         backButton = new JButton("Back");
 //        backButton.addActionListener(new ManagerAppGUI.WindowForAdd.BackListener());
 
-        buttonPanel.setSize(new Dimension(ManagerAppGUI.SCREEN_WIDTH, ManagerAppGUI.SCREEN_HEIGHT / 10));
+        buttonPanel.setSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT / 10));
         buttonPanel.setBackground(Color.LIGHT_GRAY);
         buttonPanel.setOpaque(true);
         buttonPanel.add(addButton);
@@ -82,13 +81,13 @@ public class WindowForAdd {
 
     private void createPayPanel() {
         payField = new JTextField();
-        payField.setPreferredSize(new Dimension(ManagerAppGUI.SCREEN_WIDTH / 2,
-                ManagerAppGUI.SCREEN_HEIGHT / 10 - 10));
+        payField.setPreferredSize(new Dimension(SCREEN_WIDTH / 2,
+                SCREEN_HEIGHT / 10 - 10));
 
         JLabel payLabel = new JLabel("Enter if rent was paid (true/false):");
         payPanel = new JPanel();
 
-        payPanel.setSize(new Dimension(ManagerAppGUI.SCREEN_WIDTH, ManagerAppGUI.SCREEN_HEIGHT / 10));
+        payPanel.setSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT / 10));
         payPanel.setBackground(Color.LIGHT_GRAY);
         payPanel.setOpaque(true);
         payPanel.add(payLabel);
@@ -97,13 +96,13 @@ public class WindowForAdd {
 
     private void createStatusPanel() {
         statusField = new JTextField();
-        statusField.setPreferredSize(new Dimension(ManagerAppGUI.SCREEN_WIDTH / 2,
-                ManagerAppGUI.SCREEN_HEIGHT / 10 - 10));
+        statusField.setPreferredSize(new Dimension(SCREEN_WIDTH / 2,
+                SCREEN_HEIGHT / 10 - 10));
 
         JLabel statusLabel = new JLabel("Enter status:");
         statusPanel = new JPanel();
 
-        statusPanel.setSize(new Dimension(ManagerAppGUI.SCREEN_WIDTH, ManagerAppGUI.SCREEN_HEIGHT / 10));
+        statusPanel.setSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT / 10));
         statusPanel.setBackground(Color.LIGHT_GRAY);
         statusPanel.setOpaque(true);
         statusPanel.add(statusLabel);
@@ -112,13 +111,13 @@ public class WindowForAdd {
 
     private void createCapacityPanel() {
         capacityField = new JTextField();
-        capacityField.setPreferredSize(new Dimension(ManagerAppGUI.SCREEN_WIDTH / 2,
-                ManagerAppGUI.SCREEN_HEIGHT / 10 - 10));
+        capacityField.setPreferredSize(new Dimension(SCREEN_WIDTH / 2,
+                SCREEN_HEIGHT / 10 - 10));
 
         JLabel capacityLabel = new JLabel("Enter capacity:");
         capacityPanel = new JPanel();
 
-        capacityPanel.setSize(new Dimension(ManagerAppGUI.SCREEN_WIDTH, ManagerAppGUI.SCREEN_HEIGHT / 10));
+        capacityPanel.setSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT / 10));
         capacityPanel.setBackground(Color.LIGHT_GRAY);
         capacityPanel.setOpaque(true);
         capacityPanel.add(capacityLabel);
@@ -127,13 +126,13 @@ public class WindowForAdd {
 
     private void createPricePanel() {
         priceField = new JTextField();
-        priceField.setPreferredSize(new Dimension(ManagerAppGUI.SCREEN_WIDTH / 2,
-                ManagerAppGUI.SCREEN_HEIGHT / 10 - 10));
+        priceField.setPreferredSize(new Dimension(SCREEN_WIDTH / 2,
+                SCREEN_HEIGHT / 10 - 10));
 
         JLabel priceLabel = new JLabel("Enter price:");
         pricePanel = new JPanel();
 
-        pricePanel.setSize(new Dimension(ManagerAppGUI.SCREEN_WIDTH, ManagerAppGUI.SCREEN_HEIGHT / 10));
+        pricePanel.setSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT / 10));
         pricePanel.setBackground(Color.LIGHT_GRAY);
         pricePanel.setOpaque(true);
         pricePanel.add(priceLabel);
@@ -142,14 +141,14 @@ public class WindowForAdd {
 
     private void createAddressPanel() {
         addressField = new JTextField();
-        addressField.setPreferredSize(new Dimension(ManagerAppGUI.SCREEN_WIDTH,
-                ManagerAppGUI.SCREEN_HEIGHT / 10 - 10));
+        addressField.setPreferredSize(new Dimension(SCREEN_WIDTH,
+                SCREEN_HEIGHT / 10 - 10));
 
 
         JLabel addressLabel = new JLabel("Enter address:");
         addressPanel = new JPanel();
 
-        addressPanel.setSize(new Dimension(ManagerAppGUI.SCREEN_WIDTH, ManagerAppGUI.SCREEN_HEIGHT / 10));
+        addressPanel.setSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT / 10));
         addressPanel.setBackground(Color.LIGHT_GRAY);
         addressPanel.setOpaque(true);
 
@@ -167,7 +166,7 @@ public class WindowForAdd {
         
 //        this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
         frame.setLayout((new FlowLayout(FlowLayout.LEADING)));
-        frame.setSize(ManagerAppGUI.SCREEN_WIDTH, ManagerAppGUI.SCREEN_HEIGHT);
+        frame.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
 
         setUpPanels();
 

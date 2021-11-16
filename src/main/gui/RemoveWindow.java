@@ -2,7 +2,6 @@ package gui;
 
 import model.ManagementList;
 import model.Property;
-import ui.ManagerAppGUI;
 import ui.ManagerAppGUI2;
 
 import javax.swing.*;
@@ -33,8 +32,8 @@ public class RemoveWindow {
         removeButton.setBackground(Color.LIGHT_GRAY);
         removeButton.addActionListener(new DoRemoveListener());
         removeField = new JTextField();
-        removeField.setPreferredSize(new Dimension(ManagerAppGUI.SCREEN_WIDTH / 2,
-                ManagerAppGUI.SCREEN_HEIGHT / 10 - 10));
+        removeField.setPreferredSize(new Dimension(SCREEN_WIDTH / 2,
+                SCREEN_HEIGHT / 10 - 10));
         removePanel = new JPanel();
         removePanel.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT / 10));
         removePanel.setBackground(Color.LIGHT_GRAY);
@@ -65,7 +64,7 @@ public class RemoveWindow {
         frame = new JFrame("Removing property");
 //        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout((new FlowLayout(FlowLayout.CENTER)));
-        frame.setSize(ManagerAppGUI.SCREEN_WIDTH, ManagerAppGUI.SCREEN_HEIGHT);
+        frame.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
 
         setUpRemovePanel();
 
