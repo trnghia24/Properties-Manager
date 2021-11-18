@@ -1,4 +1,4 @@
-package phase2;
+package ui;
 
 import model.*;
 import persistence.JsonReader;
