@@ -1,4 +1,4 @@
-package gui;
+package ui;
 
 import model.ManagementList;
 import model.Property;
@@ -6,8 +6,8 @@ import model.Property;
 import javax.swing.*;
 import java.awt.*;
 
-import static gui.ManagerAppGUI2.SCREEN_HEIGHT;
-import static gui.ManagerAppGUI2.SCREEN_WIDTH;
+import static ui.ManagerAppGUI2.SCREEN_HEIGHT;
+import static ui.ManagerAppGUI2.SCREEN_WIDTH;
 
 // Represent a window to display all properties
 public class ShowWindow {

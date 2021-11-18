@@ -1,4 +1,4 @@
-package ui;
+package phase2;
 
 import model.*;
 import persistence.JsonReader;
@@ -6,7 +6,6 @@ import persistence.JsonWriter;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.sql.SQLOutput;
 import java.util.Scanner;
 
 // This class references code from this repo

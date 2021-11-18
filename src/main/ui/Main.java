@@ -1,6 +1,4 @@
-package gui;
-
-import gui.ManagerAppGUI2;
+package ui;
 
 import java.io.FileNotFoundException;
 

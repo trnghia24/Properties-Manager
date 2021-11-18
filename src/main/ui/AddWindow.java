@@ -1,4 +1,4 @@
-package gui;
+package ui;
 
 import model.ManagementList;
 import model.Property;
@@ -7,8 +7,8 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import static gui.ManagerAppGUI2.SCREEN_HEIGHT;
-import static gui.ManagerAppGUI2.SCREEN_WIDTH;
+import static ui.ManagerAppGUI2.SCREEN_HEIGHT;
+import static ui.ManagerAppGUI2.SCREEN_WIDTH;
 
 public class AddWindow extends JFrame {
     private JFrame frame;

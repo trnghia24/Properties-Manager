@@ -1,4 +1,4 @@
-package gui;
+package ui;
 
 import model.ManagementList;
 import model.Property;
@@ -8,8 +8,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import static gui.ManagerAppGUI2.SCREEN_HEIGHT;
-import static gui.ManagerAppGUI2.SCREEN_WIDTH;
+import static ui.ManagerAppGUI2.SCREEN_HEIGHT;
+import static ui.ManagerAppGUI2.SCREEN_WIDTH;
 
 // Represents a window for removing properties
 public class RemoveWindow {
@@ -18,6 +18,7 @@ public class RemoveWindow {
     private JButton removeButton;
     private JTextField removeField;
     private JPanel removePanel;
+    private JLabel instructionLabel;
     private ManagementList properties;
 
     public RemoveWindow() {
@@ -31,6 +32,9 @@ public class RemoveWindow {
         removeButton.setOpaque(true);
         removeButton.setBackground(Color.LIGHT_GRAY);
         removeButton.addActionListener(new DoRemoveListener());
+
+        instructionLabel = new JLabel("Enter address:");
+
         removeField = new JTextField();
         removeField.setPreferredSize(new Dimension(SCREEN_WIDTH / 2,
                 SCREEN_HEIGHT / 10 - 10));
@@ -39,6 +43,7 @@ public class RemoveWindow {
         removePanel.setBackground(Color.LIGHT_GRAY);
         removePanel.setOpaque(true);
         removePanel.setLayout(new FlowLayout());
+        removePanel.add(instructionLabel);
         removePanel.add(removeField);
         removePanel.add(removeButton);
     }

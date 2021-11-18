@@ -1,4 +1,4 @@
-package gui;
+package ui;
 
 
 
@@ -136,7 +136,7 @@ public class ManagerAppGUI2 {
         imageLabel = new JLabel();
         imageLabel.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT - SCREEN_HEIGHT / 10));
         ImageIcon image = new ImageIcon(
-                "/Users/trnghia240/IdeaProjects/personal project/project_m7p3q/src/main/gui/screen logo.png");
+                "/Users/trnghia240/IdeaProjects/personal project/project_m7p3q/src/main/ui/screen logo.png");
         imageLabel.setIcon(image);
     }
 

@@ -1,10 +1,4 @@
 {
     "name": "My property list",
-    "properties": [{
-        "address": "1 ubc",
-        "paid?": false,
-        "price": 1880,
-        "capacity": 2,
-        "status": true
-    }]
+    "properties": []
 }
