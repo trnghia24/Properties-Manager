@@ -2,7 +2,6 @@ package gui;
 
 import model.ManagementList;
 import model.Property;
-import ui.ManagerAppGUI2;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,9 +9,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
-import static ui.ManagerAppGUI2.SCREEN_HEIGHT;
-import static ui.ManagerAppGUI2.SCREEN_WIDTH;
+import static gui.ManagerAppGUI2.SCREEN_HEIGHT;
+import static gui.ManagerAppGUI2.SCREEN_WIDTH;
 
+// Represents a user's window for adding properties
 public class WindowForAdd {
     private JFrame frame;
     private JPanel addressPanel;
@@ -21,8 +21,6 @@ public class WindowForAdd {
     private JPanel statusPanel;
     private JPanel payPanel;
     private JPanel buttonPanel;
-
-
 
     private JTextField addressField;
     private JTextField priceField;
@@ -39,38 +37,29 @@ public class WindowForAdd {
         setUpFrame();
     }
 
+    //EFFECTS: set up this screen's field
     private void setUpPanels() {
-        //
         createAddressPanel();
 
-        //
         createPricePanel();
 
-
-        //
         createCapacityPanel();
 
-        //
         createStatusPanel();
 
-
-        //
         createPayPanel();
 
-
         createButtonPanel();
-
-
     }
 
-
+    // EFFECTS: creates a panel to contain 'Add' and 'Back' buttons
     private void createButtonPanel() {
         buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 
         addButton = new JButton("Add");
         addButton.addActionListener(new AddListener());
         backButton = new JButton("Back");
-//        backButton.addActionListener(new ManagerAppGUI.WindowForAdd.BackListener());
+        backButton.addActionListener(new BackListener());
 
         buttonPanel.setSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT / 10));
         buttonPanel.setBackground(Color.LIGHT_GRAY);
@@ -79,13 +68,16 @@ public class WindowForAdd {
         buttonPanel.add(backButton);
     }
 
+    // EFFECTS: create the field for inserting payment status
     private void createPayPanel() {
         payField = new JTextField();
-        payField.setPreferredSize(new Dimension(SCREEN_WIDTH / 2,
+        payField.setPreferredSize(new Dimension(SCREEN_WIDTH / 10,
                 SCREEN_HEIGHT / 10 - 10));
 
         JLabel payLabel = new JLabel("Enter if rent was paid (true/false):");
         payPanel = new JPanel();
+        payPanel = new JPanel();
+        payPanel.setLayout(new FlowLayout(FlowLayout.LEADING));
 
         payPanel.setSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT / 10));
         payPanel.setBackground(Color.LIGHT_GRAY);
@@ -94,14 +86,16 @@ public class WindowForAdd {
         payPanel.add(payField);
     }
 
+    // EFFECTS: create the field for inserting rental status
     private void createStatusPanel() {
         statusField = new JTextField();
-        statusField.setPreferredSize(new Dimension(SCREEN_WIDTH / 2,
+        statusField.setPreferredSize(new Dimension(SCREEN_WIDTH / 10,
                 SCREEN_HEIGHT / 10 - 10));
 
-        JLabel statusLabel = new JLabel("Enter status:");
-        statusPanel = new JPanel();
+        JLabel statusLabel = new JLabel("Enter if property was rented (true/false):");
 
+        statusPanel = new JPanel();
+        statusPanel.setLayout(new FlowLayout(FlowLayout.LEADING));
         statusPanel.setSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT / 10));
         statusPanel.setBackground(Color.LIGHT_GRAY);
         statusPanel.setOpaque(true);
@@ -109,14 +103,16 @@ public class WindowForAdd {
         statusPanel.add(statusField);
     }
 
+    // EFFECTS: create the field for inserting capacity
     private void createCapacityPanel() {
         capacityField = new JTextField();
-        capacityField.setPreferredSize(new Dimension(SCREEN_WIDTH / 2,
+        capacityField.setPreferredSize(new Dimension(SCREEN_WIDTH / 10,
                 SCREEN_HEIGHT / 10 - 10));
 
         JLabel capacityLabel = new JLabel("Enter capacity:");
-        capacityPanel = new JPanel();
 
+        capacityPanel = new JPanel();
+        capacityPanel.setLayout(new FlowLayout(FlowLayout.LEADING));
         capacityPanel.setSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT / 10));
         capacityPanel.setBackground(Color.LIGHT_GRAY);
         capacityPanel.setOpaque(true);
@@ -124,14 +120,16 @@ public class WindowForAdd {
         capacityPanel.add(capacityField);
     }
 
+    // EFFECTS: create the field for inserting rental price
     private void createPricePanel() {
         priceField = new JTextField();
         priceField.setPreferredSize(new Dimension(SCREEN_WIDTH / 2,
                 SCREEN_HEIGHT / 10 - 10));
 
         JLabel priceLabel = new JLabel("Enter price:");
-        pricePanel = new JPanel();
 
+        pricePanel = new JPanel();
+        pricePanel.setLayout(new FlowLayout(FlowLayout.LEADING));
         pricePanel.setSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT / 10));
         pricePanel.setBackground(Color.LIGHT_GRAY);
         pricePanel.setOpaque(true);
@@ -139,33 +137,33 @@ public class WindowForAdd {
         pricePanel.add(priceField);
     }
 
+    // EFFECTS: create the field for inserting address
     private void createAddressPanel() {
         addressField = new JTextField();
-        addressField.setPreferredSize(new Dimension(SCREEN_WIDTH,
+        addressField.setPreferredSize(new Dimension(SCREEN_WIDTH / 2,
                 SCREEN_HEIGHT / 10 - 10));
 
 
         JLabel addressLabel = new JLabel("Enter address:");
-        addressPanel = new JPanel();
 
+        addressPanel = new JPanel();
+        addressPanel.setLayout(new FlowLayout(FlowLayout.LEADING));
         addressPanel.setSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT / 10));
         addressPanel.setBackground(Color.LIGHT_GRAY);
         addressPanel.setOpaque(true);
-
         addressPanel.add(addressLabel);
         addressPanel.add(addressField);
     }
 
+    // MODIFIES: this
+    // EFFECTS: set up frame and display all components
     private void setUpFrame() {
         properties = ManagerAppGUI2.getManagementList();
 
         frame = new JFrame("Adding property");
         
         frame.setSize(SCREEN_WIDTH,SCREEN_HEIGHT);
-        frame.setLayout(new BorderLayout());
-        
-//        this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
-        frame.setLayout((new FlowLayout(FlowLayout.LEADING)));
+        frame.setLayout(new GridLayout(6,1));
         frame.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
 
         setUpPanels();
@@ -179,10 +177,11 @@ public class WindowForAdd {
         frame.add(buttonPanel);
 
         frame.setVisible(true);
-
     }
 
+    // Represents an ActionListener for 'Add' button
     class AddListener implements ActionListener {
+        // EFFECTS: add property to the management list
         @Override
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == addButton) {
@@ -203,27 +202,21 @@ public class WindowForAdd {
                 p.setPaid(paid);
 
                 properties.addProperty(p);
-
-                for (Property x: properties.getProperties()) {
-                    System.out.println(x.displayInfo());
-
-                }
-
-
             }
 
         }
     }
 
-//    class BackListener implements ActionListener {
-//        @Override
-//        public void actionPerformed(ActionEvent e) {
-//            if (e.getSource() == backButton) {
-//                this.dispose();
-//            }
-//        }
-//    }
-
-
+    // Represents an ActionListener for 'Back' button
+    class BackListener implements ActionListener {
+        // MODIFIES: this
+        // EFFECTS: prompts user back to the home screen
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (e.getSource() == backButton) {
+                frame.dispose();
+            }
+        }
+    }
 
 }

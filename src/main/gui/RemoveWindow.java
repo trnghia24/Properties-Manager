@@ -2,16 +2,16 @@ package gui;
 
 import model.ManagementList;
 import model.Property;
-import ui.ManagerAppGUI2;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import static ui.ManagerAppGUI2.SCREEN_HEIGHT;
-import static ui.ManagerAppGUI2.SCREEN_WIDTH;
+import static gui.ManagerAppGUI2.SCREEN_HEIGHT;
+import static gui.ManagerAppGUI2.SCREEN_WIDTH;
 
+// Represents a window for removing properties
 public class RemoveWindow {
     private JFrame frame;
 
@@ -24,7 +24,7 @@ public class RemoveWindow {
         setUpFrame();
     }
 
-
+    // EFFECTS: create a remove field for this window
     private void setUpRemovePanel() {
         removeButton = new JButton("Remove");
         removeButton.setFocusable(false);
@@ -43,8 +43,9 @@ public class RemoveWindow {
         removePanel.add(removeButton);
     }
 
+    // Represents an ActionListener for 'Remove' button
     class DoRemoveListener implements ActionListener {
-
+        // EFFECTS: remove the properties in the management list whose address matches user's input
         @Override
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == removeButton) {
@@ -58,11 +59,11 @@ public class RemoveWindow {
         }
     }
 
+    // EFFECTS: set up frame and display all components
     private void setUpFrame() {
         properties = ManagerAppGUI2.getManagementList();
 
         frame = new JFrame("Removing property");
-//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout((new FlowLayout(FlowLayout.CENTER)));
         frame.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
 

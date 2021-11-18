@@ -2,15 +2,13 @@ package gui;
 
 import model.ManagementList;
 import model.Property;
-import ui.ManagerAppGUI2;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import java.time.format.DateTimeFormatter;
 
-import static ui.ManagerAppGUI2.SCREEN_HEIGHT;
-import static ui.ManagerAppGUI2.SCREEN_WIDTH;
+import static gui.ManagerAppGUI2.SCREEN_HEIGHT;
+import static gui.ManagerAppGUI2.SCREEN_WIDTH;
 
 public class DisplayWindow extends JFrame {
     private JPanel mainPanel;

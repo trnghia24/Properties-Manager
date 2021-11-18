@@ -1,9 +1,9 @@
-package ui;
+package gui;
 
 
-import gui.*;
+
 import model.ManagementList;
-import model.Property;
+
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,25 +12,20 @@ import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import persistence.JsonReader;
 import persistence.JsonWriter;
-
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.sql.SQLOutput;
-import java.util.ArrayList;
-import java.util.Scanner;
 
+
+// Manager application
 public class ManagerAppGUI2 {
     public static final int SCREEN_HEIGHT = 500;
     public static final int SCREEN_WIDTH = 500;
 
     private static ManagementList properties;
-    Property propertyToView;
 
     private JFrame frame;
 
     private JButton addButton;
     private JButton removeButton;
-    private JButton viewButton;
     private JButton saveButton;
     private JButton loadButton;
     private JButton showButton;
@@ -48,7 +43,7 @@ public class ManagerAppGUI2 {
     }
 
 
-    //Initialize the buttons and text fields
+    // EFFECTS: Initialize necessary components for the app
     private void init() {
         properties = new ManagementList();
         jsonWriter = new JsonWriter(JSON_STORE);
@@ -58,14 +53,11 @@ public class ManagerAppGUI2 {
 
         setUpRemoveButton();
 
-        setUpViewButton();
-
         setUpSaveButton();
 
         setUpLoadButton();
 
         setUpShowButton();
-
 
         setUpButtonBar();
 
@@ -74,6 +66,7 @@ public class ManagerAppGUI2 {
 
     }
 
+    // EFFECTS: create a button for adding properties
     private void setUpAddButton() {
         addButton = new JButton();
         addButton.setText("Add");
@@ -83,6 +76,7 @@ public class ManagerAppGUI2 {
         addButton.addActionListener(new AddListener());
     }
 
+    // EFFECTS: create a button for removing properties
     private void setUpRemoveButton() {
         removeButton = new JButton();
         removeButton.setText("Remove");
@@ -92,15 +86,7 @@ public class ManagerAppGUI2 {
         removeButton.addActionListener(new RemoveListener());
     }
 
-    private void setUpViewButton() {
-        viewButton = new JButton();
-        viewButton.setText("View");
-        viewButton.setFocusable(false);
-        viewButton.setOpaque(true);
-        viewButton.setBackground(Color.LIGHT_GRAY);
-//        viewButton.addActionListener(new ViewListener());
-    }
-
+    // EFFECTS: create a button for saving
     private void setUpSaveButton() {
         saveButton = new JButton();
         saveButton.setText("Save");
@@ -110,6 +96,7 @@ public class ManagerAppGUI2 {
         saveButton.addActionListener(new SaveListener());
     }
 
+    // EFFECTS: create a button for loading
     private void setUpLoadButton() {
         loadButton = new JButton();
         loadButton.setText("Load");
@@ -119,15 +106,17 @@ public class ManagerAppGUI2 {
         loadButton.addActionListener(new LoadListener());
     }
 
+    // EFFECTS: create a button for showing and viewing properties
     private void setUpShowButton() {
         showButton = new JButton();
-        showButton.setText("Show");
+        showButton.setText("Show & View");
         showButton.setFocusable(false);
         showButton.setOpaque(true);
         showButton.setBackground(Color.LIGHT_GRAY);
         showButton.addActionListener(new ShowListener());
     }
 
+    // EFFECTS: set up a bar to contain all of this screen's buttons
     private void setUpButtonBar() {
         buttonBar = new JPanel();
         buttonBar.setPreferredSize(new Dimension(SCREEN_WIDTH / 10, SCREEN_HEIGHT / 10));
@@ -136,12 +125,13 @@ public class ManagerAppGUI2 {
         buttonBar.setLayout(new FlowLayout());
         buttonBar.add(addButton);
         buttonBar.add(removeButton);
-        buttonBar.add(viewButton);
+        buttonBar.add(showButton);
         buttonBar.add(saveButton);
         buttonBar.add(loadButton);
-        buttonBar.add(showButton);
+
     }
 
+    // EFFECTS: set up a home screen image
     private void setUpHomeScreenImage() {
         imageLabel = new JLabel();
         imageLabel.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT - SCREEN_HEIGHT / 10));
@@ -150,8 +140,10 @@ public class ManagerAppGUI2 {
         imageLabel.setIcon(image);
     }
 
+    // Represent an ActionListener for 'Add' button
     class AddListener implements ActionListener {
-
+        // MODIFIES: this
+        // EFFECTS: prompts user to a new window for adding properties when 'Add' button is clicked
         @Override
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == addButton) {
@@ -161,7 +153,10 @@ public class ManagerAppGUI2 {
         }
     }
 
+    // Represent an ActionListener for 'Remove' button
     class RemoveListener implements ActionListener {
+        // MODIFIES: this
+        // EFFECTS: prompts user to a new window for removing properties when 'Remove' button is clicked
         @Override
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == removeButton) {
@@ -170,27 +165,10 @@ public class ManagerAppGUI2 {
         }
     }
 
-
-//    class ViewListener implements ActionListener {
-//        @Override
-//        public void actionPerformed(ActionEvent e) {
-//            if (e.getSource() == viewButton) {
-//                searchPanel.setVisible(true);
-//                String inputText = searchField.getText();
-//
-//
-//                for (Property p : properties.getProperties()) {
-//                    if (inputText.equals(p.getAddress())) {
-//                        propertyToView = p;
-//                    }
-//
-//                }
-//            }
-//
-//        }
-//    }
-
+    // Represent an ActionListener for 'Show & View' button
     class ShowListener implements ActionListener {
+        // MODIFIES: this
+        // EFFECTS: prompts user to a new window for viewing properties when 'Show & View' button is clicked
         @Override
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == showButton) {
@@ -201,7 +179,9 @@ public class ManagerAppGUI2 {
         }
     }
 
+    // Represent an ActionListener for 'Save' button
     class SaveListener implements ActionListener {
+        // EFFECTS: save all the changes made
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
@@ -215,7 +195,9 @@ public class ManagerAppGUI2 {
         }
     }
 
+    // Represent an ActionListener for 'Load' button
     class LoadListener implements ActionListener {
+        // EFFECTS: load the latest saved data
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
@@ -227,7 +209,8 @@ public class ManagerAppGUI2 {
         }
     }
 
-
+    // MODIFIES: this
+    // EFFECTS: create the frame and display all components
     private void createFrame() {
         frame = new JFrame();
 
@@ -242,6 +225,7 @@ public class ManagerAppGUI2 {
         frame.setVisible(true);
     }
 
+    // EFFECTS: return the management list
     public static ManagementList getManagementList() {
         return properties;
     }
