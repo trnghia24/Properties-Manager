@@ -21,4 +21,10 @@ and change the rental price if necessary.
 - As a user, I want to be able to save my management list to file.
 - As a user, I want to be able to load my management list from file.
 
+## Phase 4: Task 2
+Sat Nov 20 20:02:40 PST 2021
+Property located at 1 ubc added
+Sat Nov 20 20:02:44 PST 2021
+Property located at 1 ubc removed
+
 
