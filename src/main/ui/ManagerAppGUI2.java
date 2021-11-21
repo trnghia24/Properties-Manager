@@ -2,6 +2,8 @@ package ui;
 
 
 
+import model.Event;
+import model.EventLog;
 import model.ManagementList;
 
 
@@ -17,8 +19,8 @@ import java.io.IOException;
 
 // Manager application
 public class ManagerAppGUI2 {
-    public static final int SCREEN_HEIGHT = 500;
-    public static final int SCREEN_WIDTH = 500;
+    public static final int SCREEN_HEIGHT = 600;
+    public static final int SCREEN_WIDTH = 600;
 
     private static ManagementList properties;
 
@@ -29,6 +31,7 @@ public class ManagerAppGUI2 {
     private JButton saveButton;
     private JButton loadButton;
     private JButton showButton;
+    private JButton quitButton;
 
     private JPanel buttonBar;
     private JLabel imageLabel;
@@ -59,12 +62,15 @@ public class ManagerAppGUI2 {
 
         setUpShowButton();
 
+        setUpQuitButton();
+
         setUpButtonBar();
 
         setUpHomeScreenImage();
 
 
     }
+
 
     // EFFECTS: create a button for adding properties
     private void setUpAddButton() {
@@ -116,6 +122,15 @@ public class ManagerAppGUI2 {
         showButton.addActionListener(new ShowListener());
     }
 
+    private void setUpQuitButton() {
+        quitButton = new JButton();
+        quitButton.setText("Quit");
+        quitButton.setFocusable(false);
+        quitButton.setOpaque(true);
+        quitButton.setBackground(Color.LIGHT_GRAY);
+        quitButton.addActionListener(new QuitListener());
+    }
+
     // EFFECTS: set up a bar to contain all of this screen's buttons
     private void setUpButtonBar() {
         buttonBar = new JPanel();
@@ -128,6 +143,7 @@ public class ManagerAppGUI2 {
         buttonBar.add(showButton);
         buttonBar.add(saveButton);
         buttonBar.add(loadButton);
+        buttonBar.add(quitButton);
 
     }
 
@@ -206,6 +222,21 @@ public class ManagerAppGUI2 {
             } catch (IOException exception) {
                 System.out.println("Unable to read from file: " + JSON_STORE);
             }
+        }
+    }
+
+    // Represent an ActionListener for "Quit" button
+    class QuitListener implements ActionListener {
+        @Override
+        // EFFECTS: print all the events to the console and quit the application
+        public void actionPerformed(ActionEvent e) {
+            EventLog el = EventLog.getInstance();
+            for (Event event: el) {
+                System.out.println(event.toString());
+            }
+            frame.dispose();
+            System.exit(0);
+
         }
     }
 

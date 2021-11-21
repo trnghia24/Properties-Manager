@@ -19,12 +19,14 @@ public class ManagementList implements Writeable {
     // EFFECTS: add a property to the end of the management list
     public void addProperty(Property p) {
         myList.add(p);
+        EventLog.getInstance().logEvent(new Event("Property located at " + p.getAddress() + " added"));
     }
 
     // MODIFIES: this
     // EFFECTS: remove a property from the management list
     public void deleteProperty(Property p) {
         myList.remove(p);
+        EventLog.getInstance().logEvent(new Event("Property located at " + p.getAddress() + " removed"));
     }
 
 
