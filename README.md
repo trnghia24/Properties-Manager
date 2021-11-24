@@ -27,4 +27,10 @@ Property located at 1 ubc added
 Sat Nov 20 20:02:44 PST 2021
 Property located at 1 ubc removed
 
+## Phase 4: Task 3
+- Make an abstract class/ interface to capture similarity of windows for adding/removing/showing properties from which 
+these functional windows could extend.
+- Display the number of properties in Show & View window, apply Observer pattern to increment/reduce the number of 
+properties whenever the user adds/removes properties from management list.
+
 
