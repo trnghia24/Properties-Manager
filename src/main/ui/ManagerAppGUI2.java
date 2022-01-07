@@ -152,7 +152,7 @@ public class ManagerAppGUI2 {
         imageLabel = new JLabel();
         imageLabel.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT - SCREEN_HEIGHT / 10));
         ImageIcon image = new ImageIcon(
-                "/Users/trnghia240/IdeaProjects/personal project/project_m7p3q/src/main/ui/screen logo.png");
+                "./data/screen logo.png");
         imageLabel.setIcon(image);
     }
 
@@ -163,7 +163,7 @@ public class ManagerAppGUI2 {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == addButton) {
-                new WindowForAdd();
+                new AddWindow();
             }
 
         }
@@ -188,7 +188,7 @@ public class ManagerAppGUI2 {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == showButton) {
-                new ShowWindow();
+                new DisplayWindow();
 
             }
 
